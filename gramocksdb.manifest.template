@@ -1,0 +1,26 @@
+[libos]
+entrypoint = "gramocksdb"
+
+[loader]
+preload = "file:{{ gramine.libos }}"
+entrypoint = "file:{{ gramine:libos  }}"
+log_level = "{{ log_level }}"
+argv0_override = "gramocksdb"
+insecure_use_cmdline_argv = true 
+
+
+[loader.env]
+LD_LIBRARY_PATH = "/lib:/lib/x86_64-linux-gnu"
+M_ARENA_MAX = 1
+
+[fs.mount.lib]
+type = "chroot"
+path = "/lib"
+uri = "file:{{ gramine.runtimedir() }}"
+
+[fs.mount.lib2]
+type = "chroot"
+path = "/lib/x86_64-linux-gnu"
+uri = "file:/lib/x86_64-linux-gnu"
+
+
