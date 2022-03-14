@@ -15,7 +15,7 @@ fn aux_get_byte_slice<T: AsRef<[u8]>>(source: &'_ T) -> &'_[u8] {
 }
 
 // simple test for rocksdb plain 
-fn normal_db_works() { 
+fn simple_db_works() { 
     {
         let db = DB::open_default(DB_PATH).unwrap();
          assert!(db.put(b"k1", b"v1").is_ok());
@@ -27,12 +27,6 @@ fn normal_db_works() {
 
 
 fn main() {
-
-    let path = "./test_dir";
-    let db = DB::open_default(path).unwrap();
-    db.put(b"key", b"value").unwrap();
-
-
-    DB::destroy(&Options::default(), path);
+    simple_db_works();
 }
 
