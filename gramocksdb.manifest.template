@@ -1,5 +1,5 @@
 [libos]
-entrypoint = "gramocksdb"
+entrypoint = "gramocksdb" # should copy from target/release from current workdir currently the work dir is current dir run this binary 
 
 [loader]
 preload = "file:{{ gramine.libos }}"
@@ -12,7 +12,6 @@ insecure_use_cmdline_argv = true
 [loader.env]
 LD_LIBRARY_PATH = "/lib:/lib/x86_64-linux-gnu"
 M_ARENA_MAX = 1
-ROCKSDB_WORK_DIR = ""
 
 
 [fs.mounts] = [
@@ -24,5 +23,12 @@ ROCKSDB_WORK_DIR = ""
 debug = false
 encalve_size = "2G"
 thread_num = 32
-
+trusted_files = [
+    "file:{{ gramine.runtimedir() }}",
+    "file:gramocksdb",
+    
+]
+protected_mrenclave_files = [
+    "file:data"
+]
 
