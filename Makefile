@@ -11,6 +11,12 @@ else
     CARGO_ARGS =
 endif
 
+.PHONY: all
+all: ${BIN_NAME} ${BIN_NAME}.manifest
+ifeq ($(SGX), 1)
+all: ${BIN_NAME}.manifest.sgx ${BIN_NAME}.token
+endif 
+
 .PHONY: ${BIN_FILE}
 ${BIN_FILE}:
 	cargo build --release ${CARGO_ARGS}
@@ -29,10 +35,30 @@ ${BIN_NAME}.manifest.sgx: ${BIN_NAME}.manifest ${BIN_FILE}
 	    --manifest $< \
 	    --output $@
 
+${BIN_NAME}.sig: ${BIN_NAME}.manifest.sgx
 
+${BIN_NAME}.token: ${BIN_NAME}.sig
+	gramine-sgx-get-token \
+	    --output $@ --sig $<
+
+.PHONY: clean
+clean: 
+	$(RM) *.token *.sig *.manifest.sgx *.manifest ${BIN_NAME}.o ${BIN_NAME} OUTPUT
+	# no use for remove the target should cargo clean again 
+	rm -rf data
 
 # I think this is no use for the latest version gramine
 .PHONY: sgx_gen_private_key
 sgx_gen_private_key:
 	openssl genrsa -out sgx_private.pem -3 3072
+
+#run: all
+#ifeq ($(SGX),1)
+#    rm -rf data
+#    mkdir -p data 
+#    gramine-sgx ${BIN_NAME}
+#else
+#    mkdir -p data
+#    gramine-direct ${BIN_NAME}
+#endif
 

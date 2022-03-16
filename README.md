@@ -14,8 +14,6 @@ Intuitively, the direct approach to protect the secret is using the key to encry
 The first one uses the enclave code and secure log to derive the key every time the enclave launched, except the enclave update and its binary changed. But in this way the newer software could not access the old data on disk.
 
 
-
-
 ## Manifest syntax notes 
 
 Gramine use the PAL to load a loader to load the user application. So the first binary will be loaded is the gramine libos binary and then will load the user application.
@@ -31,7 +29,8 @@ loader.entrypoint = "{{ gramine.runtimedir() }}" # point to current libsysdb.so 
 And then we could set the libos manifest maybe only the entrypoint
 
 ```
-libod.entrypoint = "gramocksdb" # NOTE: this binary path should in the mounted file system in libos 
+libod.entrypoint = "gramocksdb" 
+# NOTE: this binary path should in the mounted file system in libos 
 ```
 
 for example that 

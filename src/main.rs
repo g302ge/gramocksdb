@@ -26,7 +26,7 @@ fn simple_db_works() {
 }
 
 fn write_batch_works() {
-    let path = format!("{}/simple_db_works", DB_PATH);
+    let path = format!("{}/write_batch_works", DB_PATH);
     {
         let db = DB::open_default(path).unwrap();
         {
@@ -46,7 +46,7 @@ fn write_batch_works() {
             assert_eq!(r.unwrap().unwrap(), b"v1");
         }
         {
-            let mut btach = rocksdb::WriteBatch::default();
+            let mut batch = rocksdb::WriteBatch::default();
             batch.delete(b"k1");
             assert_eq!(batch.len(), 1);
             let p = db.write(batch);
@@ -68,7 +68,7 @@ fn iterator_works() {
         let iter = db.iterator(rocksdb::IteratorMode::Start);
         for (idx, (k, v)) in iter.enumerate() {
             let (key, value) = data[idx];
-            assert!((&key[..], &value[..]), (k.as_ref(), v.as_ref()));
+            assert_eq!((&key[..], &value[..]), (k.as_ref(), v.as_ref()));
         }
     }
 }
