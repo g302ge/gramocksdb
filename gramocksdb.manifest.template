@@ -22,7 +22,7 @@ mounts = [
 
 [sgx]
 debug = true
-encalve_size = "2G"
+enclave_size = "2G"
 thread_num = 32
 trusted_files = [
     "file:{{ gramine.libos }}",
