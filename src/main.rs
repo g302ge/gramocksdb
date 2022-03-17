@@ -7,7 +7,7 @@ use rocksdb::{DB, Options};
 
 // FIXME: should remove the db file dir and build in makefile 
 // need more prefix for these db storage 
-const DB_PATH: &'static str = "data";
+const DB_PATH: &'static str = "/data";
 
 
 fn aux_get_byte_slice<T: AsRef<[u8]>>(source: &'_ T) -> &'_[u8] {
@@ -95,6 +95,7 @@ fn main() {
     write_batch_works();
     iterator_works();
     snapshot_works();
+   //println!("helloworld");
 }
 
 

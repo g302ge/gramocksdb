@@ -11,12 +11,13 @@ insecure_use_cmdline_argv = true
 [loader.env]
 LD_LIBRARY_PATH = "/lib:/lib/x86_64-linux-gnu"
 #M_ARENA_MAX = "1"
+RUST_BACKTRACE = "full"
 
 [fs]
 mounts = [
     { type = "chroot", path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
     { type = "chroot", path = "/lib/x86_64-linux-gnu", uri = "file:/lib/x86_64-linux-gnu" },
-    { type = "chroot", path = "data", uri = "file:data" },
+    { type = "chroot", path = "/data", uri = "file:data" },
 ]
 
 [sgx]
@@ -29,7 +30,10 @@ trusted_files = [
     "file:gramocksdb",
     "file:/lib/x86_64-linux-gnu/",
 ]
-protected_mrenclave_files = [
-    "file:data"
+allowed_files = [
+    "file:data",
 ]
+#protected_mrenclave_files = [
+#    "file:data"
+#]
 
