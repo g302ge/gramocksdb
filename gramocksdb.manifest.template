@@ -31,9 +31,9 @@ trusted_files = [
     "file:/lib/x86_64-linux-gnu/",
 ]
 allowed_files = [
-    "file:data",
+    "file:data/",
 ]
 #protected_mrenclave_files = [
-#    "file:data"
+#    "file:data/"
 #]
 
