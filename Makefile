@@ -27,7 +27,7 @@ ${BIN_NAME}: ${BIN_FILE}
 ${BIN_NAME}.manifest: ${BIN_NAME}.manifest.template
 	mkdir -p data
 	gramine-manifest \
-	    -Dlog_level=debug \
+	    -Dlog_level=all \
 	    $< $@
 
 ${BIN_NAME}.manifest.sgx: ${BIN_NAME}.manifest ${BIN_FILE}

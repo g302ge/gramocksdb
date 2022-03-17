@@ -4,7 +4,7 @@ entrypoint = "gramocksdb"
 [loader]
 preload = "file:/usr/local/lib/x86_64-linux-gnu/gramine/libsysdb.so"
 entrypoint = "file:/usr/local/lib/x86_64-linux-gnu/gramine/libsysdb.so"
-log_level = "debug"
+log_level = "all"
 argv0_override = "gramocksdb"
 insecure_use_cmdline_argv = true
 
