@@ -2,6 +2,8 @@
 
 rocksdb running in gramine libos experiment, create plain rocksdb operations for RW in practice
 
+currently we need use the PR 464
+
 ## Sealing 
 
 The motivation is that when the enclave processes exits, the data within the boundary of the enclave will lost. So we have to a mechanism for reusing the data from disk.
